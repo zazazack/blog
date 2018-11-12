@@ -3,10 +3,13 @@ services:
     image: zwilson/blog
     build: .
     env_file: .env
+    environment:
+      - PYTHONUNBUFFERED=1
+      - FLASK_APP=blog
+      - FLASK_ENV=development
     ports:
       - 5000:5000
     volumes:
-      - ./blog:/usr/src/blog
-      - ./tests:/usr/src/tests
-    command: flask run
+      - .:/usr/src/app
+    command: flask run --host 0.0.0.0
 version: "3.7"
