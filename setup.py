@@ -1,10 +1,15 @@
-from pathlib import Path
+from os import path
+
 from setuptools import setup, find_packages
 
-about = {}
+here = path.abspath(path.dirname(__file__))
 
-here = Path(__file__).absolute().parent
-long_description = here.joinpath('README.md')
+with open(path.join(here, 'README.md'), encoding='utf-8') as f:
+    long_description = f.read().strip()
+
+with open(path.join(here, 'blog', 'VERSION'), encoding='utf-8') as f:
+    __version__ = f.read().strip()
+
 
 setup(
     author_email='wilsonze@gmail.com',
@@ -14,11 +19,11 @@ setup(
     install_requires=[
         'flask',
     ],
-    long_description=long_description.read_text(),
+    long_description=long_description,
     name='blog',
     packages=find_packages(),
-    use_scm_version=True,
-    setup_requires=['setuptools_scm'],
-    # version=about['VERSION'],
+    # use_scm_version=True,
+    # setup_requires=['setuptools_scm'],
+    version=__version__,
     zip_safe=False,
 )

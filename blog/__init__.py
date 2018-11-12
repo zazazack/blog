@@ -1,5 +1,4 @@
-import os
-
+from os import path, makedirs
 from flask import Flask
 
 
@@ -10,7 +9,7 @@ def create_app(test_config=None):
     # set absolute configuration values for all instances
     app.config.from_mapping(
         SECRET_KEY='dev',
-        DATABASE=os.path.join(app.instance_path, 'blog.sqlite')
+        DATABASE=path.join(app.instance_path, 'blog.sqlite'),
     )
 
     # load additional configuration values from file, if it exisits
@@ -23,11 +22,11 @@ def create_app(test_config=None):
 
     # ensure instance folder exists
     try:
-        os.makedirs(app.instance_path)
+        makedirs(app.instance_path)
     except OSError:
         pass
 
-    # simple test page
+    # IMPORTANT: For testing only. visit http://0.0.0.0:5000
     @app.route('/hello')
     def hello():
         return 'Hello, World!'
