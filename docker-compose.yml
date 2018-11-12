@@ -1,0 +1,12 @@
+services:
+  blog:
+    image: zwilson/blog
+    build: .
+    env_file: .env
+    ports:
+      - 5000:5000
+    volumes:
+      - ./blog:/usr/src/blog
+      - ./tests:/usr/src/tests
+    command: flask run
+version: "3.7"
