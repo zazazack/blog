@@ -1,15 +1,11 @@
 from os import path
 
-from setuptools import setup, find_packages
+from setuptools import find_packages, setup
 
 here = path.abspath(path.dirname(__file__))
 
 with open(path.join(here, 'README.md'), encoding='utf-8') as f:
     long_description = f.read().strip()
-
-with open(path.join(here, 'blog', 'VERSION'), encoding='utf-8') as f:
-    version = f.read().strip()
-
 
 setup(
     author_email='wilsonze@gmail.com',
@@ -19,14 +15,12 @@ setup(
     install_requires=[
         'flask',
     ],
+    setup_requires=['setuptools_scm', 'setuptools_scm_about'],
+    use_scm_version={'write_to': 'blog/_version.py'},
     license='GPLv3',
     long_description=long_description,
     name='blog',
     packages=find_packages(),
-    # XXX: setuptools_scm seems to cause some issues with the docker build
-    # use_scm_version=True,
-    # setup_requires=['setuptools_scm'],
-    version=version,
     zip_safe=False,
     url='https://github.com/zazazack/blog',
     classifiers=[

@@ -1,5 +1,11 @@
-from os import path, makedirs
+from os import makedirs, path
+
 from flask import Flask
+
+try:
+    from ._version import version as __version__
+except ImportError:
+    from .__about__ import __version__
 
 
 def create_app(test_config=None):
@@ -8,8 +14,7 @@ def create_app(test_config=None):
 
     # set absolute configuration values for all instances
     app.config.from_mapping(
-        SECRET_KEY="dev", DATABASE=path.join(app.instance_path, "blog.sqlite")
-    )
+        SECRET_KEY="dev", DATABASE=path.join(app.instance_path, "blog.sqlite"))
 
     # load additional configuration values from file, if it exisits
     if test_config is None:  # Default
