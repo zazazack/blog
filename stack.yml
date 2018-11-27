@@ -9,11 +9,11 @@ networks:
 services:
   app:
     image:              zwilson/blog
-    build:              .
+    build:              https://github.com/zazazack/blog.git
     environment:
       - PYTHONUBUFFERED=1
-      - FLASK_ENV=development
-      - FLASK_DEBUG=True
+      - FLASK_ENV=production
+      - FLASK_DEBUG=False
       - FLASK_APP=blog
     networks:
       - backend
@@ -36,19 +36,13 @@ services:
       - backend
     ports:
       - 8000:8000
-    volumes:
-      - ./configs/proxy/default.conf:/etc/nginx/conf.d/default.conf:ro
-    command:            nginx-debug -g 'daemon off;'
   web:
     image:              nginx:alpine
-    configs:
-      - source: web.conf
-        target: /etc/nginx/conf.d/default.conf
+      configs:
+        - source: web.conf
+          target: /etc/nginx/conf.d/default.conf
     networks:
       - frontend
     ports:
       - 80:80
-    volumes:
-      - ./configs/web/default.conf:/etc/nginx/conf.d/default.conf:ro
-    command:            nginx-debug -g 'daemon off;'
 version:                "3.7"
