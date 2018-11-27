@@ -7,10 +7,14 @@ name = "pypi"
 python-dotenv = "*"
 click = "*"
 Flask = "*"
+sqlalchemy = "*"
+gunicorn = "*"
+waitress = "*"
 
 [dev-packages]
 blog = {editable = true, path = "."}
 setuptools_scm = "*"
+bumpversion = "*"
 
 [requires]
 python_version = "3.7"
